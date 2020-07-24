@@ -1,0 +1,2105 @@
+{
+  "name": "Landing Page Theme",
+  "displayName": "Landing Page Theme",
+  "description": "Landing Page Theme with CMS features.",
+  "author": "Orchard Skills, Inc.",
+  "website": "https://OrchardSkills.com",
+  "version": "1.0.0-rc2",
+  "issetuprecipe": true,
+  "categories": [ "default" ],
+  "tags": [ "Landing Page" ],
+
+  // The variables are evaluated the first time they are accessed, and reused across steps
+  "variables": {
+    "blogContentItemId": "[js:uuid()]",
+    "menuContentItemId": "[js:uuid()]",
+    "tagsContentItemId": "[js:uuid()]",
+    "tagContentItemId": "[js:uuid()]",
+    "earthTagContentItemId": "[js:uuid()]",
+    "marsTagContentItemId": "[js:uuid()]",
+    "explorationTagContentItemId": "[js:uuid()]",
+    "spaceTagContentItemId": "[js:uuid()]",
+    "categoriesContentItemId": "[js:uuid()]",
+    "categoryTravelContentItemId": "[js:uuid()]"
+    // "now": "[js: new Date().toISOString()]"
+  },
+
+  "steps": [
+    {
+      "name": "feature",
+      "disable": [],
+      "enable": [
+        // SaaS
+        "OrchardCore.HomeRoute",
+        "OrchardCore.Admin",
+        "OrchardCore.Diagnostics",
+        "OrchardCore.DynamicCache",
+        "OrchardCore.Features",
+        "OrchardCore.Navigation",
+        "OrchardCore.Recipes",
+        "OrchardCore.Resources",
+        "OrchardCore.Roles",
+        "OrchardCore.Settings",
+        "OrchardCore.Themes",
+        "OrchardCore.Users",
+        "OrchardCore.Users.ChangeEmail",
+        "OrchardCore.Users.Registration",
+        "OrchardCore.Users.ResetPassword",
+
+        // Content Management
+        "OrchardCore.Alias",
+        "OrchardCore.AdminMenu",
+        "OrchardCore.Autoroute",
+        "OrchardCore.ContentFields",
+        "OrchardCore.ContentPreview",
+        "OrchardCore.Contents",
+        "OrchardCore.Contents.FileContentDefinition",
+        "OrchardCore.ContentTypes",
+        "OrchardCore.CustomSettings",
+        "OrchardCore.Deployment",
+        "OrchardCore.Deployment.Remote",
+        "OrchardCore.Feeds",
+        "OrchardCore.Flows",
+        "OrchardCore.Forms",
+        "OrchardCore.HomeRoute",
+        "OrchardCore.Html",
+        "OrchardCore.Indexing",
+        "OrchardCore.Layers",
+        "OrchardCore.Lucene",
+        "OrchardCore.Lists",
+        "OrchardCore.Liquid",
+        "OrchardCore.Markdown",
+        "OrchardCore.Media",
+        "OrchardCore.Navigation",
+        "OrchardCore.Menu",
+        "OrchardCore.Queries",
+        "OrchardCore.Scripting",
+        "OrchardCore.Taxonomies",
+        "OrchardCore.Title",
+        "OrchardCore.Templates",
+        "OrchardCore.Widgets",
+        "OrchardCore.Workflows",
+        "OrchardCore.Workflows.Http",
+
+        // Themes
+        "LandingPageTheme",
+        "TheAdmin",
+        "SafeMode"
+      ]
+    },
+    {
+      "name": "themes",
+      "admin": "TheAdmin",
+      "site": "LandingPageTheme"
+    },
+    {
+      "name": "settings",
+      "HomeRoute": {
+        "Action": "Display",
+        "Controller": "Item",
+        "Area": "OrchardCore.Contents",
+        "ContentItemId": "[js: variables('blogContentItemId')]"
+      },
+      "LayerSettings": {
+        "Zones": [ "Content", "Footer" ]
+      }
+    },
+    {
+      "name": "ContentDefinition",
+      "ContentTypes": [
+        {
+          "Name": "Article",
+          "DisplayName": "Article",
+          "Hidden": false,
+          "Settings": {
+            "ContentTypeSettings": {
+              "Creatable": true,
+              "Draftable": true,
+              "Versionable": true,
+              "Listable": true
+            }
+          },
+          "ContentTypePartDefinitionRecords": [
+            {
+              "PartName": "Article",
+              "Name": "Article",
+              "Settings": {
+                "ContentTypePartSettings": {
+                  "Position": "3"
+                }
+              }
+            },
+            {
+              "PartName": "AutoroutePart",
+              "Name": "AutoroutePart",
+              "Settings": {
+                "AutoroutePartSettings": {
+                  "AllowCustomPath": true,
+                  "Pattern": "{{ Model.ContentItem | display_text | slugify }}",
+                  "ShowHomepageOption": true
+                },
+                "ContentTypePartSettings": {
+                  "Position": "1"
+                }
+              }
+            },
+            {
+              "PartName": "HtmlBodyPart",
+              "Name": "HtmlBodyPart",
+              "Settings": {
+                "ContentTypePartSettings": {
+                  "Editor": "Wysiwyg",
+                  "Position": "2"
+                }
+              }
+            },
+            {
+              "PartName": "TitlePart",
+              "Name": "TitlePart",
+              "Settings": {
+                "ContentTypePartSettings": {
+                  "Position": "0"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "Name": "LiquidPage",
+          "DisplayName": "Liquid Page",
+          "Hidden": false,
+          "Settings": {
+            "ContentTypeSettings": {
+              "Creatable": true,
+              "Draftable": true,
+              "Versionable": true,
+              "Listable": true
+            }
+          },
+          "ContentTypePartDefinitionRecords": [
+            {
+              "PartName": "LiquidPage",
+              "Name": "LiquidPage",
+              "Settings": {
+                "ContentTypePartSettings": {
+                  "Position": "2"
+                }
+              }
+            },
+            {
+              "PartName": "AutoroutePart",
+              "Name": "AutoroutePart",
+              "Settings": {
+                "AutoroutePartSettings": {
+                  "AllowCustomPath": true,
+                  "Pattern": "{{ Model.ContentItem | display_text | slugify }}",
+                  "ShowHomepageOption": true
+                },
+                "ContentTypePartSettings": {
+                  "Position": "1"
+                }
+              }
+            },
+            {
+              "PartName": "LiquidPart",
+              "Name": "LiquidPart",
+              "Settings": {
+                "ContentTypePartSettings": {
+                  "Position": "3"
+                }
+              }
+            },
+            {
+              "PartName": "TitlePart",
+              "Name": "TitlePart",
+              "Settings": {
+                "ContentTypePartSettings": {
+                  "Position": "0"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "Name": "BlogPost",
+          "DisplayName": "Blog Post",
+          "Hidden": false,
+          "Settings": {
+            "ContentTypeSettings": {
+              "Draftable": true,
+              "Versionable": true
+            }
+          },
+          "ContentTypePartDefinitionRecords": [
+            {
+              "PartName": "TitlePart",
+              "Name": "TitlePart",
+              "Settings": {
+                "ContentTypePartSettings": {
+                  "Position": "0"
+                }
+              }
+            },
+            {
+              "PartName": "AutoroutePart",
+              "Name": "AutoroutePart",
+              "Settings": {
+                "ContentTypePartSettings": {
+                  "Position": "1"
+                },
+                "AutoroutePartSettings": {
+                  "AllowCustomPath": true,
+                  "Pattern": "{{ Model.ContentItem | container | display_text | slugify }}/{{ Model.ContentItem | display_text | slugify }}",
+                  "ShowHomepageOption": false
+                }
+              }
+            },
+            {
+              "PartName": "BlogPost",
+              "Name": "BlogPost",
+              "Settings": {
+                "ContentTypePartSettings": {
+                  "Position": "3"
+                }
+              }
+            },
+            {
+              "PartName": "MarkdownBodyPart",
+              "Name": "MarkdownBodyPart",
+              "Settings": {
+                "ContentTypePartSettings": {
+                  "Editor": "Wysiwyg",
+                  "Position": "2"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "Name": "Blog",
+          "DisplayName": "Blog",
+          "Hidden": false,
+          "Settings": {
+            "ContentTypeSettings": {
+              "Creatable": true,
+              "Draftable": true,
+              "Versionable": true,
+              "Listable": true,
+              "Securable": true
+            }
+          },
+          "ContentTypePartDefinitionRecords": [
+            {
+              "PartName": "TitlePart",
+              "Name": "TitlePart",
+              "Settings": {
+                "ContentTypePartSettings": {
+                  "Position": "0"
+                }
+              }
+            },
+            {
+              "PartName": "AutoroutePart",
+              "Name": "AutoroutePart",
+              "Settings": {
+                "ContentTypePartSettings": {
+                  "Position": "1"
+                },
+                "ContentIndexSettings": {
+                  "Included": false,
+                  "Stored": false,
+                  "Analyzed": false,
+                  "Sanitized": false,
+                  "Tokenized": false,
+                  "Template": null
+                },
+                "AutoroutePartSettings": {
+                  "AllowCustomPath": true,
+                  "Pattern": "{{ Model.ContentItem | display_text | slugify }}",
+                  "ShowHomepageOption": true
+                }
+              }
+            },
+            {
+              "PartName": "Blog",
+              "Name": "Blog",
+              "Settings": {
+                "ContentTypePartSettings": {
+                  "Position": "3"
+                }
+              }
+            },
+            {
+              "PartName": "HtmlBodyPart",
+              "Name": "HtmlBodyPart",
+              "Settings": {
+                "ContentTypePartSettings": {
+                  "Position": "2"
+                }
+              }
+            },
+            {
+              "PartName": "ListPart",
+              "Name": "ListPart",
+              "Settings": {
+                "ContentTypePartSettings": {
+                  "Position": "4"
+                },
+                "ListPartSettings": {
+                  "PageSize": 10,
+                  "ContainedContentTypes": [
+                    "BlogPost"
+                  ]
+                }
+              }
+            }
+          ]
+        },
+        {
+          "Name": "Container",
+          "DisplayName": "Container",
+          "Settings": {
+            "ContentTypeSettings": {
+              "Draftable": true,
+              "Versionable": true,
+              "Securable": true,
+              "Stereotype": "Widget"
+            }
+          },
+          "ContentTypePartDefinitionRecords": [
+            {
+              "PartName": "Container",
+              "Name": "Container",
+              "Settings": {
+                "ContentTypePartSettings": {
+                  "Position": "0"
+                }
+              }
+            },
+            {
+              "PartName": "FlowPart",
+              "Name": "FlowPart",
+              "Settings": {
+                "ContentTypePartSettings": {
+                  "Position": "1"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "Name": "Blockquote",
+          "DisplayName": "Blockquote",
+          "Settings": {
+            "ContentTypeSettings": {
+              "Draftable": true,
+              "Versionable": true,
+              "Securable": true,
+              "Stereotype": "Widget"
+            }
+          },
+          "ContentTypePartDefinitionRecords": [
+            {
+              "PartName": "Blockquote",
+              "Name": "Blockquote",
+              "Settings": {
+                "ContentTypePartSettings": {
+                  "Position": "0"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "Name": "ImageWidget",
+          "DisplayName": "Image",
+          "Settings": {
+            "ContentTypeSettings": {
+              "Draftable": true,
+              "Versionable": true,
+              "Securable": true,
+              "Stereotype": "Widget"
+            }
+          },
+          "ContentTypePartDefinitionRecords": [
+            {
+              "PartName": "Image",
+              "Name": "Image",
+              "Settings": {
+                "ContentTypePartSettings": {
+                  "Position": "0"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "Name": "LiquidWidget",
+          "DisplayName": "Liquid",
+          "Settings": {
+            "ContentTypeSettings": {
+              "Draftable": true,
+              "Versionable": true,
+              "Securable": true,
+              "Listable": true,
+              "Stereotype": "Widget"
+            }
+          },
+          "ContentTypePartDefinitionRecords": [
+            {
+              "PartName": "LiquidPart",
+              "Name": "LiquidPart",
+              "Settings": {
+                "ContentTypePartSettings": {
+                  "Position": "0"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "Name": "Image",
+          "DisplayName": "Image",
+          "Settings": {
+            "ContentTypeSettings": {
+              "Versionable": true
+            }
+          },
+          "ContentTypePartDefinitionRecords": [
+            {
+              "PartName": "Image",
+              "Name": "Image",
+              "Settings": {
+                "ContentTypePartSettings": {
+                  "Position": "0"
+                }
+              }
+            },
+            {
+              "PartName": "TitlePart",
+              "Name": "TitlePart",
+              "Settings": {
+                "ContentTypePartSettings": {
+                  "Position": "0"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "Name": "Paragraph",
+          "DisplayName": "Paragraph",
+          "Settings": {
+            "ContentTypeSettings": {
+              "Draftable": true,
+              "Versionable": true,
+              "Securable": true,
+              "Stereotype": "Widget"
+            }
+          },
+          "ContentTypePartDefinitionRecords": [
+            {
+              "PartName": "Paragraph",
+              "Name": "Paragraph",
+              "Settings": {
+                "ContentTypePartSettings": {
+                  "Position": "0"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "Name": "RawHtml",
+          "DisplayName": "Raw Html",
+          "Settings": {
+            "ContentTypeSettings": {
+              "Draftable": true,
+              "Versionable": true,
+              "Securable": true,
+              "Stereotype": "Widget"
+            }
+          },
+          "ContentTypePartDefinitionRecords": [
+            {
+              "PartName": "RawHtml",
+              "Name": "RawHtml",
+              "Settings": {
+                "ContentTypePartSettings": {
+                  "Position": "0"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "Name": "Page",
+          "DisplayName": "Page",
+          "Settings": {
+            "ContentTypeSettings": {
+              "Creatable": true,
+              "Draftable": true,
+              "Versionable": true,
+              "Listable": true,
+              "Securable": true
+            }
+          },
+          "ContentTypePartDefinitionRecords": [
+            {
+              "PartName": "Page",
+              "Name": "Page",
+              "Settings": {
+                "ContentTypePartSettings": {
+                  "Position": "3"
+                }
+              }
+            },
+            {
+              "PartName": "AutoroutePart",
+              "Name": "AutoroutePart",
+              "Settings": {
+                "ContentTypePartSettings": {
+                  "Position": "1"
+                },
+                "AutoroutePartSettings": {
+                  "AllowCustomPath": true,
+                  "Pattern": "{{ Model.ContentItem | display_text | slugify }}",
+                  "ShowHomepageOption": true
+                }
+              }
+            },
+            {
+              "PartName": "FlowPart",
+              "Name": "FlowPart",
+              "Settings": {
+                "ContentTypePartSettings": {
+                  "Position": "2"
+                }
+              }
+            },
+            {
+              "PartName": "TitlePart",
+              "Name": "TitlePart",
+              "Settings": {
+                "ContentTypePartSettings": {
+                  "Position": "0"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "Name": "Tag",
+          "DisplayName": "Tag",
+          "Settings": {
+            "ContentTypeSettings": {},
+            "FullTextAspectSettings": {}
+          },
+          "ContentTypePartDefinitionRecords": [
+            {
+              "PartName": "Tag",
+              "Name": "Tag",
+              "Settings": {
+                "ContentTypePartSettings": {
+                  "Position": "1"
+                }
+              }
+            },
+            {
+              "PartName": "TitlePart",
+              "Name": "TitlePart",
+              "Settings": {
+                "ContentTypePartSettings": {
+                  "Position": "0"
+                }
+              }
+            },
+            {
+              "PartName": "AutoroutePart",
+              "Name": "AutoroutePart",
+              "Settings": {
+                "ContentTypePartSettings": {
+                  "Position": "2"
+                },
+                "AutoroutePartSettings": {
+                  "AllowCustomPath": true,
+                  "Pattern": "{{ Model.ContentItem | display_text | slugify }}",
+                  "ManageContainedItemRoutes": true
+                }
+              }
+            }
+          ]
+        },
+        {
+          "Name": "Category",
+          "DisplayName": "Category",
+          "Settings": {
+            "ContentTypeSettings": {},
+            "FullTextAspectSettings": {}
+          },
+          "ContentTypePartDefinitionRecords": [
+            {
+              "PartName": "Category",
+              "Name": "Category",
+              "Settings": {
+                "ContentTypePartSettings": {
+                  "Position": "1"
+                }
+              }
+            },
+            {
+              "PartName": "TitlePart",
+              "Name": "TitlePart",
+              "Settings": {
+                "ContentTypePartSettings": {
+                  "Position": "0"
+                }
+              }
+            },
+            {
+              "PartName": "AutoroutePart",
+              "Name": "AutoroutePart",
+              "Settings": {
+                "ContentTypePartSettings": {
+                  "Position": "2"
+                },
+                "AutoroutePartSettings": {
+                  "AllowCustomPath": true,
+                  "Pattern": "{{ Model.ContentItem | display_text | slugify }}",
+                  "ManageContainedItemRoutes": true
+                }
+              }
+            }
+          ]
+        },
+        {
+          "Name": "LandingPage",
+          "DisplayName": "Landing Page",
+          "Settings": {
+            "ContentTypeSettings": {
+              "Creatable": true,
+              "Draftable": true,
+              "Versionable": true,
+              "Listable": true,
+              "Securable": true
+            }
+          },
+          "ContentTypePartDefinitionRecords": [
+            {
+              "PartName": "LandingPage",
+              "Name": "LandingPage",
+              "Settings": {
+                "ContentTypePartSettings": {
+                  "Position": "8"
+                }
+              }
+            },
+            {
+              "PartName": "AutoroutePart",
+              "Name": "AutoroutePart",
+              "Settings": {
+                "AutoroutePartSettings": {
+                  "AllowCustomPath": true,
+                  "Pattern": "{{ Model.ContentItem | display_text | slugify }}",
+                  "ShowHomepageOption": true
+                },
+                "ContentTypePartSettings": {
+                  "Position": "1"
+                }
+              }
+            },
+            {
+              "PartName": "TitlePart",
+              "Name": "TitlePart",
+              "Settings": {
+                "ContentTypePartSettings": {
+                  "Position": "0"
+                }
+              }
+            }
+          ]
+        }
+      ],
+      "ContentParts": [
+        {
+          "Name": "Blog",
+          "Settings": {},
+          "ContentPartFieldDefinitionRecords": [
+            {
+              "FieldName": "MediaField",
+              "Name": "Image",
+              "Settings": {
+                "ContentPartFieldSettings": {
+                  "DisplayName": "Banner Image",
+                  "Position": "0"
+                },
+                "ContentIndexSettings": {
+                  "Included": false,
+                  "Stored": false,
+                  "Analyzed": false,
+                  "Sanitized": false,
+                  "Tokenized": false,
+                  "Template": null
+                },
+                "MediaFieldSettings": {
+                  "Multiple": false
+                }
+              }
+            }
+          ]
+        },
+        {
+          "Name": "BlogPost",
+          "Settings": {},
+          "ContentPartFieldDefinitionRecords": [
+            {
+              "FieldName": "TextField",
+              "Name": "Subtitle",
+              "Settings": {
+                "ContentPartFieldSettings": {
+                  "DisplayName": "Subtitle",
+                  "Position": "0"
+                }
+              }
+            },
+            {
+              "FieldName": "MediaField",
+              "Name": "Image",
+              "Settings": {
+                "ContentPartFieldSettings": {
+                  "DisplayName": "Banner Image",
+                  "Position": "1"
+                },
+                "ContentIndexSettings": {
+                  "Included": false,
+                  "Stored": false,
+                  "Analyzed": false,
+                  "Sanitized": false,
+                  "Tokenized": false,
+                  "Template": null
+                },
+                "MediaFieldSettings": {
+                  "Multiple": false
+                }
+              }
+            },
+            {
+              "FieldName": "TaxonomyField",
+              "Name": "Tags",
+              "Settings": {
+                "ContentPartFieldSettings": {
+                  "DisplayName": "Tags",
+                  "Editor": "Tags",
+                  "DisplayMode": "Tags",
+                  "Position": "2"
+                },
+                "ContentIndexSettings": {},
+                "TaxonomyFieldSettings": {
+                  "TaxonomyContentItemId": "[js: variables('tagsContentItemId')]"
+                },
+                "TaxonomyFieldTagsEditorSettings": {}
+              }
+            },
+            {
+              "FieldName": "TaxonomyField",
+              "Name": "Category",
+              "Settings": {
+                "ContentPartFieldSettings": {
+                  "DisplayName": "Category",
+                  "Position": "3"
+                },
+                "ContentIndexSettings": {},
+                "TaxonomyFieldSettings": {
+                  "TaxonomyContentItemId": "[js: variables('categoriesContentItemId')]",
+                  "Unique": true,
+                  "LeavesOnly": true
+                }
+              }
+            }
+          ]
+        },
+        {
+          "Name": "Article",
+          "Settings": {},
+          "ContentPartFieldDefinitionRecords": [
+            {
+              "FieldName": "TextField",
+              "Name": "Subtitle",
+              "Settings": {
+                "ContentPartFieldSettings": {
+                  "DisplayName": "Subtitle",
+                  "Position": "0"
+                }
+              }
+            },
+            {
+              "FieldName": "MediaField",
+              "Name": "Image",
+              "Settings": {
+                "ContentPartFieldSettings": {
+                  "DisplayName": "Banner Image",
+                  "Position": "0"
+                },
+                "MediaFieldSettings": {
+                  "Multiple": false
+                }
+              }
+            }
+          ]
+        },
+        {
+          "Name": "Blockquote",
+          "Settings": {},
+          "ContentPartFieldDefinitionRecords": [
+            {
+              "FieldName": "TextField",
+              "Name": "Quote",
+              "Settings": {
+                "ContentPartFieldSettings": {
+                  "DisplayName": "Quote",
+                  "Editor": "TextArea",
+                  "Position": "0"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "Name": "Image",
+          "Settings": {
+            "Attachable": true
+          },
+          "ContentPartFieldDefinitionRecords": [
+            {
+              "FieldName": "MediaField",
+              "Name": "Media",
+              "Settings": {
+                "ContentPartFieldSettings": {
+                  "DisplayName": "Image",
+                  "Position": "0"
+                },
+                "MediaFieldSettings": {
+                  "Multiple": false,
+                  "Required": true
+                }
+              }
+            },
+            {
+              "FieldName": "TextField",
+              "Name": "Caption",
+              "Settings": {
+                "ContentPartFieldSettings": {
+                  "DisplayName": "Caption",
+                  "Position": "1"
+                },
+                "TextFieldSettings": {
+                  "Hint": "A description of the image used as title or alternate text"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "Name": "Paragraph",
+          "Settings": {},
+          "ContentPartFieldDefinitionRecords": [
+            {
+              "FieldName": "HtmlField",
+              "Name": "Content",
+              "Settings": {
+                "ContentPartFieldSettings": {
+                  "DisplayName": "Content",
+                  "Position": "0",
+                  "Editor": "Wysiwyg"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "Name": "RawHtml",
+          "Settings": {},
+          "ContentPartFieldDefinitionRecords": [
+            {
+              "FieldName": "HtmlField",
+              "Name": "Content",
+              "Settings": {
+                "ContentPartFieldSettings": {
+                  "DisplayName": "Content",
+                  "Position": "0",
+                  "Editor": "Multiline"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "Name": "Category",
+          "Settings": {},
+          "ContentPartFieldDefinitionRecords": [
+            {
+              "FieldName": "TextField",
+              "Name": "Icon",
+              "Settings": {
+                "ContentPartFieldSettings": {
+                  "DisplayName": "Icon",
+                  "Editor": "IconPicker",
+                  "Position": "0"
+                },
+                "TextFieldSettings": {
+                  "Required": true
+                },
+                "ContentIndexSettings": {}
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      // Create the indices before the content items so they are indexed automatically.
+      "name": "lucene-index",
+      "Indices": [
+        {
+          "Search": {
+            "AnalyzerName": "standardanalyzer",
+            "IndexLatest": false,
+            "IndexedContentTypes": [
+              "Article",
+              "Blockquote",
+              "Blog",
+              "BlogPost",
+              "Button",
+              "Container",
+              "Form",
+              "ImageWidget",
+              "Image",
+              "Input",
+              "Label",
+              "LinkMenuItem",
+              "LiquidWidget",
+              "LiquidPage",
+              "Menu",
+              "Page",
+              "Paragraph",
+              "RawHtml",
+              "Select",
+              "TextArea",
+              "Validation",
+              "ValidationSummary"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      // Create the search settings.
+      "name": "Settings",
+      "LuceneSettings": {
+        "SearchIndex": "Search",
+        "DefaultSearchFields": [
+          "Content.ContentItem.FullText"
+        ]
+      }
+    },
+    {
+      // Create the search index permissions.
+      "name": "Roles",
+      "Roles": [
+        {
+          "Name": "Anonymous",
+          "Description": "Anonymous role",
+          "Permissions": [
+            "ViewContent",
+            "QueryLuceneSearchIndex"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "content",
+      "Data": [
+        {
+          "ContentType": "Menu",
+          "ContentItemId": "[js: variables('menuContentItemId')]",
+          "DisplayText": "Main Menu",
+          "Latest": true,
+          "Published": true,
+          "MenuPart": {},
+          "TitlePart": {
+            "Title": "Main Menu"
+          },
+          "MenuItemsListPart": {
+            "MenuItems": [
+              {
+                "ContentType": "LinkMenuItem",
+                "ContentItemId": "[js: uuid()]",
+                "LinkMenuItemPart": {
+                  "Name": "Home",
+                  "Url": "~/"
+                }
+              },
+              {
+                "ContentType": "LinkMenuItem",
+                "ContentItemId": "[js: uuid()]",
+                "LinkMenuItemPart": {
+                  "Name": "Blog",
+                  "Url": "~/blog"
+                }
+              },
+              {
+                "ContentType": "LinkMenuItem",
+                "ContentItemId": "[js: uuid()]",
+                "LinkMenuItemPart": {
+                  "Name": "About",
+                  "Url": "~/about"
+                }
+              },
+              {
+                "ContentType": "LinkMenuItem",
+                "ContentItemId": "[js: uuid()]",
+                "LinkMenuItemPart": {
+                  "Name": "Contact",
+                  "Url": "~/contact"
+                }
+              },
+              {
+                "ContentType": "LinkMenuItem",
+                "ContentItemId": "[js: uuid()]",
+                "LinkMenuItemPart": {
+                  "Name": "Search",
+                  "Url": "~/search"
+                }
+              }
+
+            ]
+          },
+          "AliasPart": {
+            "Alias": "main-menu"
+          }
+        },
+        {
+          "ContentItemId": "[js: variables('tagsContentItemId')]",
+          "ContentType": "Taxonomy",
+          "DisplayText": "Tags",
+          "Latest": true,
+          "Published": true,
+          "TitlePart": {
+            "Title": "Tags"
+          },
+          "AliasPart": {
+            "Alias": "tags"
+          },
+          "TaxonomyPart": {
+            "Terms": [
+              {
+                "ContentItemId": "[js: variables('earthTagContentItemId')]",
+                "ContentType": "Tag",
+                "DisplayText": "Earth",
+                "TitlePart": {
+                  "Title": "Earth"
+                },
+                "AutoroutePart": {
+                  "Path": "earth"
+                },
+                "TermPart": {
+                  "TaxonomyContentItemId": "[js: variables('tagsContentItemId')]"
+                }
+              },
+              {
+                "ContentItemId": "[js: variables('marsTagContentItemId')]",
+                "ContentType": "Tag",
+                "DisplayText": "Mars",
+                "TitlePart": {
+                  "Title": "Mars"
+                },
+                "AutoroutePart": {
+                  "Path": "mars"
+                },
+                "TermPart": {
+                  "TaxonomyContentItemId": "[js: variables('tagsContentItemId')]"
+                }
+              },
+
+              {
+                "ContentItemId": "[js: variables('explorationTagContentItemId')]",
+                "ContentType": "Tag",
+                "DisplayText": "Exploration",
+                "TitlePart": {
+                  "Title": "Exploration"
+                },
+                "AutoroutePart": {
+                  "Path": "exploration"
+                },
+                "TermPart": {
+                  "TaxonomyContentItemId": "[js: variables('tagsContentItemId')]"
+                }
+              },
+              {
+                "ContentItemId": "[js: variables('spaceTagContentItemId')]",
+                "ContentType": "Tag",
+                "DisplayText": "Space",
+                "TitlePart": {
+                  "Title": "Space"
+                },
+                "AutoroutePart": {
+                  "Path": "space"
+                },
+                "TermPart": {
+                  "TaxonomyContentItemId": "[js: variables('tagsContentItemId')]"
+                }
+              }
+            ],
+            "TermContentType": "Tag"
+          },
+          "AutoroutePart": {
+            "Path": "tags",
+            "RouteContainedItems": true
+          }
+        },
+        {
+          "ContentItemId": "[js: variables('categoriesContentItemId')]",
+          "ContentType": "Taxonomy",
+          "DisplayText": "Categories",
+          "Latest": true,
+          "Published": true,
+          "TitlePart": {
+            "Title": "Categories"
+          },
+          "AliasPart": {
+            "Alias": "categories"
+          },
+          "TaxonomyPart": {
+            "Terms": [
+              {
+                "ContentItemId": "[js: variables('categoryTravelContentItemId')]",
+                "ContentType": "Category",
+                "DisplayText": "Travel",
+                "Category": {
+                  "Icon": {
+                    "Text": "fas fa-globe-americas"
+                  }
+                },
+                "TitlePart": {
+                  "Title": "Travel"
+                },
+                "AutoroutePart": {
+                  "Path": "travel"
+                },
+                "TermPart": {
+                  "TaxonomyContentItemId": "[js: variables('categoriesContentItemId')]"
+                }
+              }
+            ],
+            "TermContentType": "Category"
+          },
+          "AutoroutePart": {
+            "Path": "categories",
+            "RouteContainedItems": true
+          }
+        },
+        {
+          "ContentType": "Blog",
+          "ContentItemId": "[js: variables('blogContentItemId')]",
+          "DisplayText": "Blog",
+          "Latest": true,
+          "Published": true,
+          "Owner": "[js: parameters('AdminUsername')]",
+          "Author": "[js: parameters('AdminUsername')]",
+          "TitlePart": {
+            "Title": "Blog"
+          },
+          "HtmlBodyPart": {
+            "Html": "This is the description of your blog"
+          },
+          "AutoroutePart": {
+            "Path": "blog"
+          },
+          "ListPart": {},
+          "Blog": {
+            "Image": {
+              "Paths": [
+                "home-bg.jpg"
+              ]
+            }
+          }
+        },
+        {
+          "ContentType": "BlogPost",
+          "ContentItemId": "[js: uuid()]",
+          "DisplayText": "Man must explore, and this is exploration at its greatest",
+          "Latest": true,
+          "Published": true,
+          "Owner": "[js: parameters('AdminUsername')]",
+          "Author": "[js: parameters('AdminUsername')]",
+          "TitlePart": {
+            "Title": "Man must explore, and this is exploration at its greatest"
+          },
+          "ContainedPart": {
+            "ListContentItemId": "[js: variables('blogContentItemId')]",
+            "Order": 0
+          },
+          "MarkdownBodyPart": {
+            "Markdown": "Never in all their history have men been able truly to conceive of the world as one: a single sphere, a globe, having the qualities of a globe, a round earth in which all the directions eventually meet, in which there is no center because every point, or none, is center — an equal earth which all men occupy as equals. The airman's earth, if free men make it, will be truly round: a globe in practice, not in theory.\n\nScience cuts two ways, of course; its products can be used for both good and evil. But there's no turning back from science. The early warnings about technological dangers also come from science.\n\nWhat was most significant about the lunar voyage was not that man set foot on the Moon but that they set eye on the earth.\n\nA Chinese tale tells of some men sent to harm a young girl who, upon seeing her beauty, become her protectors rather than her violators. That's how I felt seeing the Earth for the first time. I could not help but love and cherish her.\n\nFor those who have seen the Earth from space, and for the hundreds and perhaps thousands more who will, the experience most certainly changes your perspective. The things that we share in our world are far more valuable than those which divide us."
+          },
+          "AutoroutePart": {
+            "Path": "blog/post-1"
+          },
+          "BlogPost": {
+            "Subtitle": {
+              "Text": "Problems look mighty small from 150 miles up"
+            },
+            "Image": {
+              "Paths": [
+                "post-bg.jpg"
+              ]
+            },
+            "Tags": {
+              "TermContentItemIds": [
+                "[js: variables('earthTagContentItemId')]",
+                "[js: variables('explorationTagContentItemId')]",
+                "[js: variables('spaceTagContentItemId')]"
+              ],
+              "TaxonomyContentItemId": "[js: variables('tagsContentItemId')]",
+              "TagNames": [
+                "Earth",
+                "Exploration",
+                "Space"
+              ]
+            },
+            "Category": {
+              "TermContentItemIds": [
+                "[js: variables('categoryTravelContentItemId')]"
+              ],
+              "TaxonomyContentItemId": "[js: variables('categoriesContentItemId')]"
+            }
+          }
+        },
+        {
+          "ContentType": "BlogPost",
+          "ContentItemId": "[js: uuid()]",
+          "DisplayText": "Mars Exploration",
+          "Latest": true,
+          "Published": true,
+          "Owner": "[js: parameters('AdminUsername')]",
+          "Author": "[js: parameters('AdminUsername')]",
+          "TitlePart": {
+            "Title": "Mars Exploration"
+          },
+          "AutoroutePart": {
+            "Path": "blog/mars-exploration",
+            "SetHomepage": false,
+            "Disabled": false,
+            "RouteContainedItems": false,
+            "Absolute": false
+          },
+          "BlogPost": {
+            "Subtitle": {
+              "Text": "Investigating the Red Planet"
+            },
+            "Image": {
+              "Paths": [
+                "mars-rover.jpg"
+              ]
+            },
+            "Tags": {
+              "TagNames": [
+                "Mars",
+                "Exploration",
+                "Space"
+              ],
+              "TaxonomyContentItemId": "[js: variables('tagsContentItemId')]",
+              "TermContentItemIds": [
+                "[js: variables('marsTagContentItemId')]",
+                "[js: variables('explorationTagContentItemId')]",
+                "[js: variables('spaceTagContentItemId')]"
+              ]
+            },
+            "Category": {
+              "TaxonomyContentItemId": "[js: variables('categoriesContentItemId')]",
+              "TermContentItemIds": [
+                "[js: variables('categoryTravelContentItemId')]"
+              ]
+            }
+          },
+          "MarkdownBodyPart": {
+            "Markdown": "NASA's current mission to send an astronaut to Mars is driven by development of the Orion crew exploration vehicle. The capsule spacecraft is being designed to take humans back to the moon by 2020. In later years, by rendezvous with Mars-bound vehicles assembled in orbit, it may take the first humans to the Red Planet.\r\n\r\nThese future possibilities are exciting, but unmanned spacecraft have already greatly enhanced our knowledge of Mars.\r\n\r\nDozens of spacecraft have been sent to Mars, but only about one of every three missions has been a success. This sobering statistic underscores just how difficult it remains to send a craft to Mars and see it arrive in proper working order to transmit data back to Earth.\r\n\r\nThe first Mars missions were called flybys and involved getting a spacecraft close to the planet so that it could take images in passing.\r\n\r\nNASA's Mariner spacecraft were small robotic craft designed to explore the neighboring planets of Venus, Mars, and Mercury. Mariner 4 passed Mars in July 1965 and captured close-up images of this foreign world - the first Mars images ever returned to Earth.\r\n\r\nLater, orbiting spacecraft such as like NASA's Mariner 9 returned far more detailed data on the planet's atmosphere, mapped its surface, revealed Martian topography, and captured many more images of this strange and distant world.\r\n\r\nThese missions solved some mysteries, such as dispelling the long-held myth of Martian canals that evidenced an ancient civilization. They also raised many new questions, such as the nature of ancient riverbeds that point to the presence of ancient liquid water on the planet.\r\n\r\nViking 1 and 2, a pair of orbiter/lander missions, reached Mars in 1976. These long-lived spacecraft continued to return data as late as 1982. They captured photos of the Martian surface that astounded the public and excited scientists. The mission's landers also conducted biological experiments on Martian soil that were designed to uncover signs of life in space - but their results were inconclusive, though tantalizing.\r\n\r\nThe Mars Pathfinder mission, launched in 1996, proved that it was possible to land a free-moving rover vehicle that could travel around the planet's surface. Its rover, Sojourner, returned an unexpected wealth of scientific data, including images, weather observations, and chemical soil analyses.\r\n\r\nOngoing Missions\r\nNASA's Mars Global Surveyor has orbited the planet since March 1999 on a mission to map and study the planet's entire surface. The long-term mission has produced particular insights into the dynamic planet's changing seasons and shifting weather, including its infamous dust storms.\r\n\r\nPerhaps the most famous of all Martian missions is that of the Mars exploration rovers Spirit and Opportunity. These two rovers reached opposite sides of Mars in January 2004 and have proceeded to explore the planet far more extensively than previous missions.\r\n\r\nThe rovers have covered several miles and returned more than 100,000 high-resolution images. Probing soil and rocks, they have also used their fully equipped lab modules to conduct robotic field geology tests on the Martian surface and even below it.\r\n\r\nThe rovers continue to operate, displaying incredible staying power that far exceeds their original operational window of 90 days.\r\n\r\nMany future Mars missions are already in development and will take place long before any human visits the planet. Scientists hope that robotic craft can delve far beneath the Martian surface to return data, and possible samples, of the planet's geology. Such missions could even find signs of the water, and possible life, that may lie hidden beneath the planet's forbidding exterior."
+          },
+          "ContainedPart": {
+            "ListContentItemId": "[js: variables('blogContentItemId')]",
+            "Order": 0
+          }
+        },
+        {
+          "ContentItemId": "[js: uuid()]",
+          "ContentType": "Article",
+          "DisplayText": "About",
+          "Latest": true,
+          "Published": true,
+          "Owner": "[js: parameters('AdminUsername')]",
+          "Author": "[js: parameters('AdminUsername')]",
+          "AutoroutePart": {
+            "Path": "about",
+            "SetHomepage": false
+          },
+          "HtmlBodyPart": {
+            "Html": "<h1>About Us</h1><p>Tell your story</p><h1>Know Your Audience</h1><p>Who are you writing for? Decide on who you want to write to. Decide what you want to write about.</p><h1>What Value Are You Bringing to Your Readers?</h1><p>Why should they care? People want value, and they want it now – give it to them already! If you waffle around here, you will lose readers. You need to tell them exactly what they are going to get from your site and how it will help them.</p><h1>Build Your Credibility</h1><p>Why should they listen to you? After all, you’re just another voice on the interwebs and the interwebs are full of shady characters trying to make moves on your wallet. You need to tell your readers about your expertise. Make them trust you, help them out, and then they will love you.</p><p>Consider adding:</p><ul><li>A snippet about your site’s history<br></li><li>If you’ve been featured on any authority sites as a guest blogger<br></li></ul><h1>Your Biography</h1><p>Now you get to talk about you. You get to tell your story. But only the hyper-relevant and interesting parts.  Write about yourself like the superhero you secretly are or want to be.  But don’t overshare on the details, make sure you leave a little mystique.</p><p>Think about your story:<br></p><ul><li>What made you decide to start a blog or business?<br></li><li>What’s your big why?<br></li><li>What keeps you going?</li></ul><h1>Call to Action</h1><p>You should have at least one list opt-in form on your About page. Why? Your About page is one of the most frequently visited pages on your site. If you get it right, you’re going to connect with your readers.</p>"
+          },
+          "TitlePart": {
+            "Title": "About"
+          },
+          "Article": {
+            "Subtitle": {
+              "Text": "Reasons for reading our blog"
+            }
+          }
+        },
+        {
+          "ContentItemId": "[js: uuid()]",
+          "ContentType": "Article",
+          "DisplayText": "Thanks",
+          "Latest": true,
+          "Published": true,
+          "Owner": "[js: parameters('AdminUsername')]",
+          "Author": "[js: parameters('AdminUsername')]",
+          "AutoroutePart": {
+            "Path": "thanks",
+            "SetHomepage": false
+          },
+          "HtmlBodyPart": {
+            "Html": "<p>Thank you for your message. Someone will get back with you as soon as possible.</p>"
+          },
+          "TitlePart": {
+            "Title": "Thanks"
+          },
+          "Article": {
+            "Subtitle": {
+              "Text": "Thank You for your Message"
+            }
+          }
+        },
+        {
+          "ContentItemId": "[js: uuid()]",
+          "ContentType": "Article",
+          "DisplayText": "Not Authorized",
+          "Latest": true,
+          "Published": true,
+          "Owner": "[js: parameters('AdminUsername')]",
+          "Author": "[js: parameters('AdminUsername')]",
+          "Article": {
+            "Subtitle": {
+              "Text": "User is not authorized to access this resource"
+            }
+          },
+          "AutoroutePart": {
+            "Path": "not-authorized",
+            "SetHomepage": false,
+            "Disabled": false,
+            "RouteContainedItems": false,
+            "Absolute": false
+          },
+          "HtmlBodyPart": {
+            "Html": "<p>We apologize for your inconvenience. Unfortunately, you are not authorized to access this resource. Please <a href=\"/Login\">log in</a> or <a href=\"/Register\">register</a> and create a user account.</p>"
+          },
+          "TitlePart": {
+            "Title": "Not Authorized"
+          }
+        },
+        {
+          "ContentItemId": "[js: uuid()]",
+          "ContentType": "Page",
+          "DisplayText": "Contact",
+          "Latest": true,
+          "Published": true,
+          "Owner": "[js: parameters('AdminUsername')]",
+          "Author": "[js: parameters('AdminUsername')]",
+          "Page": {},
+          "AutoroutePart": {
+            "Path": "contact",
+            "SetHomepage": false
+          },
+          "FlowPart": {
+            "Widgets": [
+              {
+                "ContentItemId": "4xrapxrd65572r3hrqsyzpqr41",
+                "ContentItemVersionId": null,
+                "ContentType": "Form",
+                "DisplayText": "Contact",
+                "Latest": false,
+                "Published": false,
+                "PublishedUtc": null,
+                "CreatedUtc": null,
+                "Owner": null,
+                "Author": "admin",
+                "TitlePart": {
+                  "Title": "Contact"
+                },
+                "FormPart": {
+                  "Action": "/workflows/Invoke?token=CfDJ8J9X5AJrfSFEg_y2herzL9treOg0l1xGW5AbPXEVnQILZxcfB7HLcWA8hPWv79cYxceFV3RXwPyo4XiarTdobhjPAXg65suEdfjD3bGXLQXph-ACWNVHDncMesMoJxr6MKttRFk8636cBBq7LRJQy3UYfmrlx0jV-EQnBrtcgAkQPZxK6ygsX6MbifonWoz054NbfeUMQ663f85zh2gpl5MhcbPjqkhPRmNpaEfIb52g",
+                  "Method": "POST",
+                  "WorkflowTypeId": null
+                },
+                "FlowPart": {
+                  "Widgets": [
+                    {
+                      "ContentItemId": "4v2zn39myvc9v7knjjygez48db",
+                      "ContentItemVersionId": null,
+                      "ContentType": "Input",
+                      "DisplayText": "Name",
+                      "Latest": false,
+                      "Published": false,
+                      "PublishedUtc": null,
+                      "CreatedUtc": null,
+                      "Owner": null,
+                      "Author": "admin",
+                      "FormInputElementPart": {
+                        "Name": "Name"
+                      },
+                      "FormElementPart": {
+                        "Id": null
+                      },
+                      "InputPart": {
+                        "Type": "text",
+                        "DefaultValue": null,
+                        "Placeholder": "Enter Name"
+                      },
+                      "FlowMetadata": {
+                        "Alignment": 3,
+                        "Size": 100
+                      }
+                    },
+                    {
+                      "ContentItemId": "47q0d4cgpw4p2xrrsh0cggepd2",
+                      "ContentItemVersionId": null,
+                      "ContentType": "Input",
+                      "DisplayText": "Email",
+                      "Latest": false,
+                      "Published": false,
+                      "PublishedUtc": null,
+                      "CreatedUtc": null,
+                      "Owner": null,
+                      "Author": "admin",
+                      "FormInputElementPart": {
+                        "Name": "Email"
+                      },
+                      "FormElementPart": {
+                        "Id": null
+                      },
+                      "InputPart": {
+                        "Type": "email",
+                        "DefaultValue": null,
+                        "Placeholder": "Enter Email"
+                      },
+                      "FlowMetadata": {
+                        "Alignment": 3,
+                        "Size": 100
+                      }
+                    },
+                    {
+                      "ContentItemId": "4kkzj3ts1zkmys2qasnb1def5s",
+                      "ContentItemVersionId": null,
+                      "ContentType": "TextArea",
+                      "DisplayText": "Message",
+                      "Latest": false,
+                      "Published": false,
+                      "PublishedUtc": null,
+                      "CreatedUtc": null,
+                      "Owner": null,
+                      "Author": "admin",
+                      "FormInputElementPart": {
+                        "Name": "Message"
+                      },
+                      "FormElementPart": {
+                        "Id": null
+                      },
+                      "TextAreaPart": {
+                        "DefaultValue": null,
+                        "Placeholder": "Enter Message Text"
+                      },
+                      "FlowMetadata": {
+                        "Alignment": 3,
+                        "Size": 100
+                      }
+                    },
+                    {
+                      "ContentItemId": "4d1g2zxrm80z25jjs0rzyvkyxv",
+                      "ContentItemVersionId": null,
+                      "ContentType": "ValidationSummary",
+                      "DisplayText": null,
+                      "Latest": false,
+                      "Published": false,
+                      "PublishedUtc": null,
+                      "CreatedUtc": null,
+                      "Owner": null,
+                      "Author": "admin",
+                      "ValidationSummaryPart": {},
+                      "FlowMetadata": {
+                        "Alignment": 3,
+                        "Size": 100
+                      }
+                    },
+                    {
+                      "ContentItemId": "4nh88g8ddndgz3779jsv6mgbnm",
+                      "ContentItemVersionId": null,
+                      "ContentType": "Button",
+                      "DisplayText": "Submit",
+                      "Latest": false,
+                      "Published": false,
+                      "PublishedUtc": null,
+                      "CreatedUtc": null,
+                      "Owner": null,
+                      "Author": "admin",
+                      "FormInputElementPart": {
+                        "Name": "Submit"
+                      },
+                      "FormElementPart": {
+                        "Id": null
+                      },
+                      "ButtonPart": {
+                        "Text": "Submit",
+                        "Type": "submit"
+                      },
+                      "FlowMetadata": {
+                        "Alignment": 3,
+                        "Size": 100
+                      }
+                    }
+                  ]
+                },
+                "FlowMetadata": {
+                  "Alignment": 3,
+                  "Size": 100
+                }
+              }
+            ]
+          },
+          "TitlePart": {
+            "Title": "Contact"
+          }
+        },
+        {
+          "ContentItemId": "[js: uuid()]",
+          "ContentType": "RawHtml",
+          "Displaytext": "Footer",
+          "Latest": true,
+          "Published": true,
+          "Owner": "[js: parameters('AdminUsername')]",
+          "Author": "[js: parameters('AdminUsername')]",
+          "LayerMetadata": {
+            "Layer": "Always",
+            "Zone": "Footer",
+            "RenderTitle": false,
+            "Position": 10
+          },
+          "RawHtml": {
+            "Content": {
+              "Html": "[file:text('Snippets/footer.html')]"
+            }
+          }
+        },
+        {
+          "ContentItemId": "[js: uuid()]",
+          "ContentType": "LandingPage",
+          "DisplayText": "Orchard Skills",
+          "Latest": true,
+          "Published": true,
+          "Owner": "[js: parameters('AdminUsername')]",
+          "Author": "[js: parameters('AdminUsername')]",
+          "LandingPage": {},
+          "AutoroutePart": {
+            "Path": "home",
+            "SetHomepage": true,
+            "Disabled": false,
+            "RouteContainedItems": false,
+            "Absolute": false
+          },
+          "TitlePart": {
+            "Title": "Orchard Skills"
+          },
+        }
+      ]
+    },
+    {
+      "name": "media",
+      "Files": [
+        {
+          "TargetPath": "about-bg.jpg",
+          "SourcePath": "../wwwroot/img/about-bg.jpg"
+        },
+        {
+          "TargetPath": "contact-bg.jpg",
+          "SourcePath": "../wwwroot/img/contact-bg.jpg"
+        },
+
+        {
+          "TargetPath": "home-bg.jpg",
+          "SourcePath": "../wwwroot/img/home-bg.jpg"
+        },
+        {
+          "TargetPath": "mars-rover.jpg",
+          "SourcePath": "../wwwroot/img/mars-rover.jpg"
+        },
+        {
+          "TargetPath": "post-bg.jpg",
+          "SourcePath": "../wwwroot/img/post-bg.jpg"
+        },
+        {
+          "TargetPath": "search-bg.jpg",
+          "SourcePath": "../wwwroot/img/search-bg.jpg"
+        }
+
+      ]
+    },
+    {
+      "name": "layers",
+      "Layers": [
+        {
+          "Name": "Always",
+          "Rule": "true",
+          "Description": "The widgets in this layer are displayed on any page of this site."
+        },
+        {
+          "Name": "Homepage",
+          "Rule": "isHomepage()",
+          "Description": "The widgets in this layer are only displayed on the homepage."
+        }
+      ]
+    },
+    {
+      "name": "queries",
+      "Queries": [
+        {
+          "Source": "Lucene",
+          "Name": "RecentBlogPosts",
+          "Index": "Search",
+          "Template": "[file:text('Snippets/recentBlogPosts.json')]",
+          "Schema": "[js:base64('ew0KICAgICJ0eXBlIjogIkNvbnRlbnRJdGVtL0Jsb2dQb3N0Ig0KfQ==')]",
+          "ReturnContentItems": true
+        },
+        {
+          "Source": "Lucene",
+          "Name": "RecentBlogPosts",
+          "Index": "Search",
+          "Template": "[file:text('Snippets/recentBlogPosts.json')]",
+          "Schema": "[js:base64('ew0KICAgICJ0eXBlIjogIkNvbnRlbnRJdGVtL0Jsb2dQb3N0Ig0KfQ==')]",
+          "ReturnContentItems": true
+        }
+      ]
+    },
+    {
+      "name": "AdminMenu",
+      "data": [
+        {
+          "Id": "baef6f85ad13481681cde70ada401333",
+          "Name": "Admin menu from blog recipe",
+          "Enabled": true,
+          "MenuItems": [
+            {
+              "$type": "OrchardCore.AdminMenu.AdminNodes.LinkAdminNode, OrchardCore.AdminMenu",
+              "LinkText": "Blog",
+              "LinkUrl": "[js: 'Admin/Contents/ContentItems/' +  variables('blogContentItemId') + '/Display']",
+              "IconClass": "fas fa-rss",
+              "UniqueId": "7b293d57056a4eebb3713f07f12c65d8",
+              "Enabled": true,
+              "Text": null,
+              "Id": null,
+              "Href": null,
+              "Url": null,
+              "Position": null,
+              "LinkToFirstChild": true,
+              "LocalNav": false,
+              "Culture": null,
+              "Resource": null,
+              "Items": [],
+              "RouteValues": null,
+              "Permissions": [],
+              "Classes": []
+            },
+            {
+              "$type": "OrchardCore.AdminMenu.AdminNodes.LinkAdminNode, OrchardCore.AdminMenu",
+              "LinkText": "Main Menu",
+              "LinkUrl": "[js: 'Admin/Contents/ContentItems/' +  variables('menuContentItemId') + '/Edit']",
+              "IconClass": "fas fa-sitemap",
+              "UniqueId": "5118cecfde834dacb26ac08980f1b5a7",
+              "Enabled": true,
+              "Text": null,
+              "Id": null,
+              "Href": null,
+              "Url": null,
+              "Position": null,
+              "LinkToFirstChild": true,
+              "LocalNav": false,
+              "Culture": null,
+              "Resource": null,
+              "Items": [],
+              "RouteValues": null,
+              "Permissions": [],
+              "Classes": []
+            },
+            {
+              "$type": "OrchardCore.AdminMenu.AdminNodes.PlaceholderAdminNode, OrchardCore.AdminMenu",
+              "LinkText": "Content",
+              "IconClass": null,
+              "UniqueId": "3e590d44f8704e4588e272dd966ce291",
+              "Enabled": true,
+              "Text": null,
+              "Id": null,
+              "Href": null,
+              "Url": null,
+              "Position": null,
+              "LinkToFirstChild": true,
+              "LocalNav": false,
+              "Culture": null,
+              "Resource": null,
+              "Items": [
+                {
+                  "$type": "OrchardCore.AdminMenu.AdminNodes.LinkAdminNode, OrchardCore.AdminMenu",
+                  "LinkText": "Content Items",
+                  "LinkUrl": "Admin/Contents/ContentItems/",
+                  "IconClass": null,
+                  "UniqueId": "7b293d57056a4eebb3713f07f12c65d9",
+                  "Enabled": true,
+                  "Text": null,
+                  "Id": null,
+                  "Href": null,
+                  "Url": null,
+                  "Position": 0,
+                  "LinkToFirstChild": true,
+                  "LocalNav": false,
+                  "Culture": null,
+                  "Resource": null,
+                  "Items": [],
+                  "RouteValues": null,
+                  "Permissions": [],
+                  "Classes": []
+                },
+                {
+                  "$type": "OrchardCore.AdminMenu.AdminNodes.PlaceholderAdminNode, OrchardCore.AdminMenu",
+                  "LinkText": "Content Types",
+                  "IconClass": null,
+                  "UniqueId": "2f1fc33133334a1abf7d1a0516ee8b4e",
+                  "Enabled": true,
+                  "Text": null,
+                  "Id": null,
+                  "Href": null,
+                  "Url": null,
+                  "Position": 1,
+                  "Priority": 50,
+                  "LinkToFirstChild": true,
+                  "LocalNav": false,
+                  "Culture": null,
+                  "Resource": null,
+                  "Items": [
+                    {
+                      "$type": "OrchardCore.Contents.AdminNodes.ContentTypesAdminNode, OrchardCore.Contents",
+                      "ShowAll": true,
+                      "IconClass": null,
+                      "ContentTypes": [],
+                      "UniqueId": "ee18224e1b814c638b0732678b74cfd9",
+                      "Enabled": true,
+                      "Text": null,
+                      "Id": null,
+                      "Href": null,
+                      "Url": null,
+                      "Position": null,
+                      "LinkToFirstChild": true,
+                      "LocalNav": false,
+                      "Culture": null,
+                      "Resource": null,
+                      "Items": [],
+                      "RouteValues": null,
+                      "Permissions": [],
+                      "Classes": []
+                    }
+                  ],
+                  "RouteValues": null,
+                  "Permissions": [],
+                  "Classes": []
+                }
+              ],
+              "RouteValues": null,
+              "Permissions": [],
+              "Classes": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "WorkflowType",
+      "data": [
+        {
+          "WorkflowTypeId": "4jj8jr3wyat5h7f8s4dvn052db",
+          "Name": "Contact",
+          "IsEnabled": true,
+          "IsSingleton": false,
+          "DeleteFinishedWorkflows": false,
+          "Activities": [
+            {
+              "ActivityId": "490rajejvg37c4wd8m50q06mxv",
+              "Name": "HttpRequestEvent",
+              "X": 0,
+              "Y": 0,
+              "IsStart": true,
+              "Properties": {
+                "ActivityMetadata": {
+                  "Title": "Contact Form Submitted"
+                },
+                "HttpMethod": "POST",
+                "Url": "/workflows/Invoke?token=CfDJ8LNsm1L3BhpCvl1kHZG8BbD7lKzRL4aioHjYFUD-RSYTqQ-fNq1eigkX-b7fKYzHZ0y31U8oAo9pUI7xg0qz_L2ewWrx_hHn9F2jeJ-CYgdcsl0R2k7EzFmZ9VleR0SxC83VUWMoHIPE4aVH79bvuY0tIWWkkTJUE0sEHpg4LeMR_c2rdd2026JyRBxGrRwPfpUCHU2TlmQEvkxSqBUrw-yXabqBgQjpfMX1GKHrhVGe",
+                "ValidateAntiforgeryToken": true,
+                "TokenLifeSpan": 0
+              }
+            },
+            {
+              "ActivityId": "4jjt2hqjp6xk9164hkp0cxv3w7",
+              "Name": "BindModelStateTask",
+              "X": 0,
+              "Y": 190,
+              "IsStart": false,
+              "Properties": {
+                "ActivityMetadata": {
+                  "Title": null
+                }
+              }
+            },
+            {
+              "ActivityId": "4hr22mvxwk0rex8khhkr9cnncp",
+              "Name": "ForkTask",
+              "X": 340,
+              "Y": 20,
+              "IsStart": false,
+              "Properties": {
+                "ActivityMetadata": {
+                  "Title": "Validate Form Fields"
+                },
+                "Forks": [
+                  "Validate Name",
+                  "Validate Email",
+                  "Validate Message"
+                ]
+              }
+            },
+            {
+              "ActivityId": "4655jbn3247ksrt08a2b7r8yw9",
+              "Name": "ValidateFormFieldTask",
+              "X": 320,
+              "Y": 190,
+              "IsStart": false,
+              "Properties": {
+                "FieldName": "Name",
+                "ErrorMessage": "No Name entered",
+                "ActivityMetadata": {
+                  "Title": "Validate Name"
+                }
+              }
+            },
+            {
+              "ActivityId": "4xp021fs701ay5gmram0nyjcdh",
+              "Name": "ValidateFormFieldTask",
+              "X": 760,
+              "Y": 170,
+              "IsStart": false,
+              "Properties": {
+                "FieldName": "Email",
+                "ErrorMessage": "Email not valid",
+                "ActivityMetadata": {
+                  "Title": "Validate Email"
+                }
+              }
+            },
+            {
+              "ActivityId": "4dpzxry0zjy4t0xhj1xfj5mm4k",
+              "Name": "ValidateFormFieldTask",
+              "X": 1150,
+              "Y": 200,
+              "IsStart": false,
+              "Properties": {
+                "FieldName": "Message",
+                "ErrorMessage": "No Message entered",
+                "ActivityMetadata": {
+                  "Title": "Validate Message"
+                }
+              }
+            },
+            {
+              "ActivityId": "48cgyy0wzhjf50yrkz422rn2n1",
+              "Name": "JoinTask",
+              "X": 440,
+              "Y": 300,
+              "IsStart": false,
+              "Properties": {
+                "ActivityMetadata": {
+                  "Title": null
+                },
+                "Mode": 0
+              }
+            },
+            {
+              "ActivityId": "4crzwchrbc2fkym4jbg7aed44j",
+              "Name": "ValidateFormTask",
+              "X": 500,
+              "Y": 470,
+              "IsStart": false,
+              "Properties": {
+                "ActivityMetadata": {
+                  "Title": null
+                }
+              }
+            },
+            {
+              "ActivityId": "47j30tb53gecc2yqewbx3x8pn4",
+              "Name": "EmailTask",
+              "X": 810,
+              "Y": 470,
+              "IsStart": false,
+              "Properties": {
+                "Sender": {
+                  "Expression": "sales@orchardskills.com"
+                },
+                "Recipients": {
+                  "Expression": "sales@orchardskills.com"
+                },
+                "Subject": {
+                  "Expression": "New Message"
+                },
+                "Body": {
+                  "Expression": "<p>The following information was submitted:<p/>\r\n<p>Name: {{ Request.Form.Name }}</p>\r\n<p>Email: {{ Request.Form.Email }}</p>\r\n<p>Message: {{ Request.Form.Message }}</p>"
+                },
+                "IsBodyHtml": true,
+                "ActivityMetadata": {
+                  "Title": "Email to Site Admin"
+                }
+              }
+            },
+            {
+              "ActivityId": "4kyt6yjc0nhp7zn89gmbhrbsdv",
+              "Name": "HttpRedirectTask",
+              "X": 190,
+              "Y": 470,
+              "IsStart": false,
+              "Properties": {
+                "ActivityMetadata": {
+                  "Title": "Display Form Errors"
+                },
+                "Location": {
+                  "Expression": "/contact"
+                },
+                "Permanent": false
+              }
+            },
+            {
+              "ActivityId": "4kbg33s0s6v491sp4k2dpeymn2",
+              "Name": "HttpRedirectTask",
+              "X": 1090,
+              "Y": 470,
+              "IsStart": false,
+              "Properties": {
+                "ActivityMetadata": {
+                  "Title": "Display Thank You Page"
+                },
+                "Location": {
+                  "Expression": "/thanks"
+                },
+                "Permanent": false
+              }
+            }
+          ],
+          "Transitions": [
+            {
+              "Id": 0,
+              "SourceActivityId": "490rajejvg37c4wd8m50q06mxv",
+              "SourceOutcomeName": "Done",
+              "DestinationActivityId": "4jjt2hqjp6xk9164hkp0cxv3w7"
+            },
+            {
+              "Id": 0,
+              "SourceActivityId": "4jjt2hqjp6xk9164hkp0cxv3w7",
+              "SourceOutcomeName": "Done",
+              "DestinationActivityId": "4hr22mvxwk0rex8khhkr9cnncp"
+            },
+            {
+              "Id": 0,
+              "SourceActivityId": "4hr22mvxwk0rex8khhkr9cnncp",
+              "SourceOutcomeName": "Validate Name",
+              "DestinationActivityId": "4655jbn3247ksrt08a2b7r8yw9"
+            },
+            {
+              "Id": 0,
+              "SourceActivityId": "4655jbn3247ksrt08a2b7r8yw9",
+              "SourceOutcomeName": "Done",
+              "DestinationActivityId": "48cgyy0wzhjf50yrkz422rn2n1"
+            },
+            {
+              "Id": 0,
+              "SourceActivityId": "48cgyy0wzhjf50yrkz422rn2n1",
+              "SourceOutcomeName": "Joined",
+              "DestinationActivityId": "4crzwchrbc2fkym4jbg7aed44j"
+            },
+            {
+              "Id": 0,
+              "SourceActivityId": "4crzwchrbc2fkym4jbg7aed44j",
+              "SourceOutcomeName": "Valid",
+              "DestinationActivityId": "47j30tb53gecc2yqewbx3x8pn4"
+            },
+            {
+              "Id": 0,
+              "SourceActivityId": "4crzwchrbc2fkym4jbg7aed44j",
+              "SourceOutcomeName": "Invalid",
+              "DestinationActivityId": "4kyt6yjc0nhp7zn89gmbhrbsdv"
+            },
+            {
+              "Id": 0,
+              "SourceActivityId": "47j30tb53gecc2yqewbx3x8pn4",
+              "SourceOutcomeName": "Done",
+              "DestinationActivityId": "4kbg33s0s6v491sp4k2dpeymn2"
+            },
+            {
+              "Id": 0,
+              "SourceActivityId": "4hr22mvxwk0rex8khhkr9cnncp",
+              "SourceOutcomeName": "Validate Email",
+              "DestinationActivityId": "4xp021fs701ay5gmram0nyjcdh"
+            },
+            {
+              "Id": 0,
+              "SourceActivityId": "4hr22mvxwk0rex8khhkr9cnncp",
+              "SourceOutcomeName": "Validate Message",
+              "DestinationActivityId": "4dpzxry0zjy4t0xhj1xfj5mm4k"
+            },
+            {
+              "Id": 0,
+              "SourceActivityId": "4xp021fs701ay5gmram0nyjcdh",
+              "SourceOutcomeName": "Done",
+              "DestinationActivityId": "48cgyy0wzhjf50yrkz422rn2n1"
+            },
+            {
+              "Id": 0,
+              "SourceActivityId": "4dpzxry0zjy4t0xhj1xfj5mm4k",
+              "SourceOutcomeName": "Done",
+              "DestinationActivityId": "48cgyy0wzhjf50yrkz422rn2n1"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Settings",
+      "LoginSettings": {
+        "UseSiteTheme": true,
+        "UseExternalProviderIfOnlyOneDefined": false,
+        "DisableLocalLogin": false,
+        "UseScriptToSyncRoles": false,
+        "SyncRolesScript": null
+      }
+    },
+    {
+      "name": "Templates",
+      "Templates": {
+        "Content__LandingPage": {
+          "Content": "{% zone \"Header\" %}\r\n<!-- Header -->\r\n<header class=\"masthead\">\r\n    <div class=\"container\">\r\n        <div class=\"masthead-subheading\">Welcome To Our Studio!</div>\r\n        <div class=\"masthead-heading text-uppercase\">{{ Model.ContentItem | display_text }}</div>\r\n        <a class=\"btn btn-primary btn-xl text-uppercase js-scroll-trigger\" href=\"#services\">Tell Me More</a>\r\n    </div>\r\n</header>\r\n{% endzone %}\r\n\r\n{% if Model.ContentItem.Content.Services.ContentItems.size > 0 %}\r\n<!-- Services -->\r\n<section class=\"page-section\" id=\"services\">\r\n    <div class=\"container\">\r\n        <div class=\"row\">\r\n            <div class=\"col-lg-12 text-center\">\r\n                <h2 class=\"section-heading text-uppercase\">Services</h2>\r\n                <h3 class=\"section-subheading text-muted\">Lorem ipsum dolor sit amet consectetur.</h3>\r\n            </div>\r\n        </div>\r\n        <div class=\"row text-center\">\r\n            {% for service in Model.ContentItem.Content.Services.ContentItems %}\r\n            <div class=\"col-md-4\">\r\n                <span class=\"fa-stack fa-4x\">\r\n                    <i class=\"fas fa-circle fa-stack-2x text-primary\"></i>\r\n                    <i class=\"fas {{ service.Service.IconClass.Text }} fa-stack-1x fa-inverse\"></i>\r\n                </span>\r\n                <h4 class=\"service-heading\">{{ service.DisplayText }}</h4>\r\n                <p class=\"text-muted\">{{ service.HtmlBodyPart.Html | raw }}</p>\r\n            </div>\r\n            {% endfor %}\r\n        </div>\r\n    </div>\r\n</section>\r\n{% endif %}\r\n\r\n{% if Model.ContentItem.Content.Portfolio.ContentItems.size > 0 %}\r\n<!-- Portfolio Grid -->\r\n<section class=\"page-section bg-light\" id=\"portfolio\">\r\n    <div class=\"container\">\r\n        <div class=\"row\">\r\n            <div class=\"col-lg-12 text-center\">\r\n                <h2 class=\"section-heading text-uppercase\">Portfolio</h2>\r\n                <h3 class=\"section-subheading text-muted\">Lorem ipsum dolor sit amet consectetur.</h3>\r\n            </div>\r\n        </div>\r\n        <div class=\"row\">\r\n            {% for project in Model.ContentItem.Content.Portfolio.ContentItems %}\r\n            <div class=\"col-md-4 col-sm-6 portfolio-item\">\r\n                <div class=\"portfolio-link\" data-toggle=\"modal\" href=\"#portfolioModal{{ forloop.index }}\">\r\n                    <div class=\"portfolio-hover\">\r\n                        <div class=\"portfolio-hover-content\">\r\n                            <i class=\"fas fa-plus fa-3x\"></i>\r\n                        </div>\r\n                    </div>\r\n                    <img class=\"img-fluid\" src=\"{{ project.Project.Image.Paths.first | asset_url | resize_url: width:480, height: 480, mode: 'stretch' }}\" alt=\"{{ project.DisplayText }}\">\r\n                </div>\r\n                <div class=\"portfolio-caption\">\r\n                    <h4>{{ project.DisplayText }}</h4>\r\n                    <p class=\"text-muted\">{{ project.Project.Category.Text }}</p>\r\n                </div>\r\n            </div>\r\n            {% endfor %}\r\n        </div>\r\n    </div>\r\n</section>\r\n{% endif %}\r\n\r\n{% if Model.ContentItem.Content.About.ContentItems.size > 0 %}\r\n<!-- About -->\r\n<section class=\"page-section\" id=\"about\">\r\n    <div class=\"container\">\r\n        <div class=\"row\">\r\n            <div class=\"col-lg-12 text-center\">\r\n                <h2 class=\"section-heading text-uppercase\">About</h2>\r\n                <h3 class=\"section-subheading text-muted\">Lorem ipsum dolor sit amet consectetur.</h3>\r\n            </div>\r\n        </div>\r\n        <div class=\"row\">\r\n            <div class=\"col-lg-12\">\r\n                <ul class=\"timeline\">\r\n                    {% for milestone in Model.ContentItem.Content.About.ContentItems %}\r\n                    <li class=\"{% cycle '', 'timeline-inverted' %}\">\r\n                        <div class=\"timeline-image\">\r\n                            <img class=\"rounded-circle img-fluid\" src=\"{{ milestone.Milestone.Image.Paths.first | asset_url | resize_url: width:160, height: 160, mode: 'stretch' }}\" alt=\"\">\r\n                        </div>\r\n                        <div class=\"timeline-panel\">\r\n                            <div class=\"timeline-heading\">\r\n                                <h4>{{ milestone.Milestone.Date.Text }}</h4>\r\n                                <h4 class=\"subheading\">{{ milestone.DisplayText }}</h4>\r\n                            </div>\r\n                            <div class=\"timeline-body\">\r\n                                <p class=\"text-muted\">{{ milestone.HtmlBodyPart.Html }}</p>\r\n                            </div>\r\n                        </div>\r\n                    </li>\r\n                    {% endfor %}\r\n                    <li class=\"timeline-inverted\">\r\n                        <div class=\"timeline-image\">\r\n                            <h4>\r\n                                Be Part\r\n                                <br>Of Our\r\n                                <br>Story!\r\n                            </h4>\r\n                        </div>\r\n                    </li>\r\n                </ul>\r\n            </div>\r\n        </div>\r\n    </div>\r\n</section>\r\n{% endif %}\r\n\r\n{% if Model.ContentItem.Content.Team.ContentItems.size > 0 %}\r\n<!-- Team -->\r\n<section class=\"page-section bg-light\" id=\"team\">\r\n    <div class=\"container\">\r\n        <div class=\"row\">\r\n            <div class=\"col-lg-12 text-center\">\r\n                <h2 class=\"section-heading text-uppercase\">Our Amazing Team</h2>\r\n                <h3 class=\"section-subheading text-muted\">Lorem ipsum dolor sit amet consectetur.</h3>\r\n            </div>\r\n        </div>\r\n        <div class=\"row\">\r\n            {% for member in Model.ContentItem.Content.Team.ContentItems %}\r\n            <div class=\"col-sm-4\">\r\n                <div class=\"team-member\">\r\n                    <img class=\"mx-auto rounded-circle\" src=\"{{ member.TeamMember.Picture.Paths.first | asset_url | resize_url: width:240, height: 240, mode: 'stretch' }}\" alt=\"\">\r\n                    <h4>{{ member.DisplayText }}</h4>\r\n                    <p class=\"text-muted\">{{ member.TeamMember.Occupation.Text }}</p>\r\n                    <ul class=\"list-inline social-buttons\">\r\n                        {% if member.TeamMember.Twitter.Text.size > 0 %}\r\n                        <li class=\"list-inline-item\">\r\n                            <a href=\"https://www.twitter.com/{{ member.TeamMember.Twitter.Text }}\">\r\n                                <i class=\"fab fa-twitter\"></i>\r\n                            </a>\r\n                        </li>\r\n                        {% endif %}\r\n                        {% if member.TeamMember.Facebook.Text.size > 0 %}\r\n                        <li class=\"list-inline-item\">\r\n                            <a href=\"https://www.facebook.com/{{ member.TeamMember.Facebook.Text }}\">\r\n                                <i class=\"fab fa-facebook\"></i>\r\n                            </a>\r\n                        </li>\r\n                        {% endif %}\r\n                        {% if member.TeamMember.LinkedIn.Text.size > 0 %}\r\n                        <li class=\"list-inline-item\">\r\n                            <a href=\"https://www.linkedin.com/in/{{ member.TeamMember.LinkedIn.Text }}\">\r\n                                <i class=\"fab fa-linkedin\"></i>\r\n                            </a>\r\n                        </li>\r\n                        {% endif %}\r\n                    </ul>\r\n                </div>\r\n            </div>\r\n            {% endfor %}\r\n        </div>\r\n        <div class=\"row\">\r\n            <div class=\"col-lg-8 mx-auto text-center\">\r\n                <p class=\"large text-muted\">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut eaque, laboriosam veritatis, quos non quis ad perspiciatis, totam corporis ea, alias ut unde.</p>\r\n            </div>\r\n        </div>\r\n    </div>\r\n</section>\r\n{% endif %}\r\n\r\n{% if Model.ContentItem.Content.Clients.ContentItems.size > 0 %}\r\n<!-- Clients -->\r\n<section class=\"page-section py-5\">\r\n    <div class=\"container\">\r\n        <div class=\"row\">\r\n            {% for client in Model.ContentItem.Content.Clients.ContentItems %}\r\n            <div class=\"col-md-3 col-sm-6\">\r\n                <a href=\"{{ client.Client.Url.Text }}\">\r\n                    <img class=\"img-fluid d-block mx-auto\" src=\"{{ client.Client.Logo.Paths.first | asset_url }}\" alt=\"\">\r\n                </a>\r\n            </div>\r\n            {% endfor %}\r\n        </div>\r\n    </div>\r\n</section>\r\n{% endif %}\r\n\r\n<!-- Contact -->\r\n<section class=\"page-section\" id=\"contact\">\r\n    <div class=\"container\">\r\n        <div class=\"row\">\r\n            <div class=\"col-lg-12 text-center\">\r\n                <h2 class=\"section-heading text-uppercase\">Contact Us</h2>\r\n                <h3 class=\"section-subheading text-muted\">Lorem ipsum dolor sit amet consectetur.</h3>\r\n            </div>\r\n        </div>\r\n        <div class=\"row\">\r\n            <div class=\"col-lg-12\">\r\n                <form id=\"contactForm\" name=\"sentMessage\" novalidate>\r\n                    <div class=\"row\">\r\n                        <div class=\"col-md-6\">\r\n                            <div class=\"form-group\">\r\n                                <input class=\"form-control\" id=\"name\" type=\"text\" placeholder=\"Your Name *\" required data-validation-required-message=\"Please enter your name.\">\r\n                                <p class=\"help-block text-danger\"></p>\r\n                            </div>\r\n                            <div class=\"form-group\">\r\n                                <input class=\"form-control\" id=\"email\" type=\"email\" placeholder=\"Your Email *\" required data-validation-required-message=\"Please enter your email address.\">\r\n                                <p class=\"help-block text-danger\"></p>\r\n                            </div>\r\n                            <div class=\"form-group\">\r\n                                <input class=\"form-control\" id=\"phone\" type=\"tel\" placeholder=\"Your Phone *\" required data-validation-required-message=\"Please enter your phone number.\">\r\n                                <p class=\"help-block text-danger\"></p>\r\n                            </div>\r\n                        </div>\r\n                        <div class=\"col-md-6\">\r\n                            <div class=\"form-group\">\r\n                                <textarea class=\"form-control\" id=\"message\" placeholder=\"Your Message *\" required data-validation-required-message=\"Please enter a message.\"></textarea>\r\n                                <p class=\"help-block text-danger\"></p>\r\n                            </div>\r\n                        </div>\r\n                        <div class=\"clearfix\"></div>\r\n                        <div class=\"col-lg-12 text-center\">\r\n                            <div id=\"success\"></div>\r\n                            <button id=\"sendMessageButton\" class=\"btn btn-primary btn-xl text-uppercase\" type=\"submit\">Send Message</button>\r\n                        </div>\r\n                    </div>\r\n                </form>\r\n            </div>\r\n        </div>\r\n    </div>\r\n</section>\r\n\r\n<!-- Modals -->\r\n{% for project in Model.ContentItem.Content.Portfolio.ContentItems %}\r\n<div class=\"portfolio-modal modal fade\" id=\"portfolioModal{{ forloop.index }}\" tabindex=\"-1\" role=\"dialog\" aria-hidden=\"true\">\r\n    <div class=\"modal-dialog\">\r\n        <div class=\"modal-content\">\r\n            <div class=\"close-modal\" data-dismiss=\"modal\">\r\n                <div class=\"lr\">\r\n                    <div class=\"rl\"></div>\r\n                </div>\r\n            </div>\r\n            <div class=\"container\">\r\n                <div class=\"row\">\r\n                    <div class=\"col-lg-8 mx-auto\">\r\n                        <div class=\"modal-body\">\r\n                            <!-- Project Details Go Here -->\r\n                            <h2 class=\"text-uppercase\">{{ project.DisplayText }}</h2>\r\n                            <p class=\"item-intro text-muted\">{{ project.Project.Category.Text }}</p>\r\n                            <img class=\"img-fluid d-block mx-auto\" src=\"{{ project.Project.Image.Paths.first | asset_url | resize_url: width:480, height: 480, mode: 'max' }}\" alt=\"{{ project.DisplayText }}\">\r\n                            <p>{{ project.HtmlBodyPart.Html | raw }}</p>\r\n                            {% comment %}\r\n                            <ul class=\"list-inline\">\r\n                                <li>Date: January 2017</li>\r\n                                <li>Client: Threads</li>\r\n                                <li>Category: Illustration</li>\r\n                            </ul>\r\n                            {% endcomment %}\r\n                            <button class=\"btn btn-primary\" data-dismiss=\"modal\" type=\"button\">\r\n                                <i class=\"fa fa-times\"></i>\r\n                                Close Project\r\n                            </button>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n        </div>\r\n    </div>\r\n</div>\r\n{% endfor %}",
+          "Description": "A template for the Landing Page content type"
+        }
+      }
+    }
+  ]
+}
