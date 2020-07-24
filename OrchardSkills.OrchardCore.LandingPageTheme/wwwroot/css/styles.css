@@ -131,3 +131,17 @@ a.badge-secondary:focus, a.badge-secondary.focus {
 #mainNav {
     transition: top 0.3s, background-color 0.4s ease-out;
 }
+.rellax-container {
+    position: relative;
+    z-index: 999;
+    background-color: white;
+}
+.blur {
+    width: 110%;
+    margin-left: -10%;
+    height: 117px;
+    background-color: #030000;
+    position: absolute;
+    filter: blur(80px);
+    z-index: 999;
+}

@@ -53,12 +53,24 @@
         </div>
     </nav>
     @await RenderSectionAsync("Header", required: false)
-    <main role="main" class="container">
+    <main role="main" class="">
         @await RenderSectionAsync("Messages", required: false)
         @await RenderBodyAsync()
     </main>
     @await RenderSectionAsync("Footer", required: false)
     <resources type="FootScript" />
+    <script src="~/LandingPageTheme/js/rellax.js"></script>
+<script>
+  // Accepts any class name
+ var rellax = new Rellax('.rellax', {
+    speed: -2,
+    center: false,
+    wrapper: null,
+    round: true,
+    vertical: true,
+    horizontal: false
+  });
+</script>
 <script>
   let scrollpos = window.scrollY
   const header = document.querySelector("#mainNav")
