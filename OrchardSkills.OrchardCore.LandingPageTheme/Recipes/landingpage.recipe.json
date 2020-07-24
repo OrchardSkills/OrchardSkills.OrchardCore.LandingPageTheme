@@ -1600,7 +1600,7 @@
         {
           "ContentItemId": "[js: uuid()]",
           "ContentType": "LandingPage",
-          "DisplayText": "Orchard Skills",
+          "DisplayText": "[js: parameters('SiteName')]",
           "Latest": true,
           "Published": true,
           "Owner": "[js: parameters('AdminUsername')]",
@@ -1614,8 +1614,8 @@
             "Absolute": false
           },
           "TitlePart": {
-            "Title": "Orchard Skills"
-          },
+            "Title": "[js: parameters('SiteName')]"
+          }
         }
       ]
     },
