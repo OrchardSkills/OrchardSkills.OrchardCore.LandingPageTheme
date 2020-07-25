@@ -43,6 +43,7 @@ h3,
 h4,
 h5,
 h6,
+li,
 a {
   color: var(--font-color) !important;
 }
@@ -62,7 +63,10 @@ label,
 .navbar {
   background-color: var(--html-background);
 }
-
+.list-group-item {
+    color: var(--font-color) !important;
+    background-color: var(--html-background) !important;
+}
 .copyright-background {
   background-color: var(--hover-color) !important;
 }
