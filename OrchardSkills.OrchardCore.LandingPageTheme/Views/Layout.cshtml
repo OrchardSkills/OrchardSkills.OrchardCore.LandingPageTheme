@@ -1,17 +1,21 @@
 ﻿<!DOCTYPE html>
 <html lang="@Orchard.CultureName()">
+
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no" />
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <title>@RenderTitleSegments(Site.SiteName, "before")</title>
     <link type="image/x-icon" rel="shortcut icon" href="~/TheCleanBlogTheme/favicon.ico" />
-    <link href='https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
-    <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet'
+        type='text/css'>
+    <link
+        href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800'
+        rel='stylesheet' type='text/css'>
 
     <!-- Material Design Theme CSS -->
     <style asp-name="LandingPageTheme-css" , version:"1"></style>
-    
+
     <!-- Custom styles -->
     <style asp-src="~/LandingPageTheme/css/styles.css" debug-src="~/LandingPageTheme/css/styles.css"></style>
 
@@ -21,86 +25,128 @@
     <!-- Material Design Theme JavaScript -->
     <script asp-name="LandingPageTheme-js" at="Foot" version="1"></script>
 
-    <script asp-src="~/OrchardCore.Menu/Scripts/activate-links.min.js" debug-src="~/OrchardCore.Menu/Scripts/activate-links.js" at="Foot"></script>
+    @*
+    <script asp-src="~/OrchardCore.Menu/Scripts/activate-links.min.js"
+        debug-src="~/OrchardCore.Menu/Scripts/activate-links.js" at="Foot"></script> *@
 
     <resources type="Meta" />
     <resources type="HeadLink" />
     <resources type="Stylesheet" />
     <resources type="HeadScript" />
 </head>
+
 <body dir="@Orchard.CultureDir()">
-    <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+    <nav class="navbar navbar-expand-lg navbar-color fixed-top" id="mainNav">
         <div class="container">
-            <a class="navbar-brand" href="~/#">@Site.SiteName</a>
-<!-- Toggle button -->
-    <button
-      class="navbar-toggler"
-      type="button"
-      data-toggle="collapse"
-      data-target="#navbarSupportedContent"
-      aria-controls="navbarSupportedContent"
-      aria-expanded="false"
-      aria-label="Toggle navigation"
-    >
-      <span class="navbar-toggler-icon"></span>
-    </button>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <div class="logo">
+                <a class="navbar-brand" href="~/#">@Site.SiteName</a>
+                <!-- Toggle button -->
+                <label id="switch" class="switch navbar-item">
+                    <input type="checkbox" onchange="toggleTheme()" id="slider">
+                    <span class="slider round"></span>
+                </label>
+            </div>
+
+            <button class="navbar-toggler nav-tgl" type="button" data-toggle="collapse"
+                data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
                 <ul class="navbar-nav ml-auto mb-2 mb-lg-0">
-                       <menu alias="alias:main-menu" cache-id="main-menu" cache-fixed-duration="00:05:00" cache-tag="alias:main-menu" />
-                       <partial name="LoginMenu" />
+                    <menu alias="alias:main-menu" cache-id="main-menu" cache-fixed-duration="00:05:00"
+                        cache-tag="alias:main-menu" />
+                    <partial name="LoginMenu" />
                 </ul>
             </div>
+
         </div>
+
     </nav>
     @await RenderSectionAsync("Header", required: false)
     <main role="main" class="">
         @await RenderSectionAsync("Messages", required: false)
         @await RenderBodyAsync()
     </main>
+    <hr>
     @await RenderSectionAsync("Footer", required: false)
     <resources type="FootScript" />
     <script src="~/LandingPageTheme/js/rellax.js"></script>
-<script>
-  // Accepts any class name
- var rellax = new Rellax('.rellax', {
-    speed: -2,
-    center: false,
-    wrapper: null,
-    round: true,
-    vertical: true,
-    horizontal: false
-  });
-</script>
-<script>
-  let scrollpos = window.scrollY
-  const header = document.querySelector("#mainNav")
-  const header_height = header.offsetHeight
+    <script>
+        // Accepts any class name
+        var rellax = new Rellax('.rellax', {
+            speed: -2,
+            center: false,
+            wrapper: null,
+            round: true,
+            vertical: true,
+            horizontal: false
+        });
+    </script>
+    <script>
+        let scrollpos = window.scrollY
+        const header = document.querySelector("#mainNav")
+        const header_height = header.offsetHeight
 
-  const add_class_on_scroll = () => header.classList.add("bg-light")
-  const remove_class_on_scroll = () => header.classList.remove("bg-light")
+        const add_class_on_scroll = () => header.classList.add("navbar-color")
+        const remove_class_on_scroll = () => header.classList.remove("navbar-color")
 
-  window.addEventListener('scroll', function() { 
-    scrollpos = window.scrollY;
+        window.addEventListener('scroll', function () {
+            scrollpos = window.scrollY;
 
-    if (scrollpos >= header_height) { add_class_on_scroll() }
-    else { remove_class_on_scroll() }
+            if (scrollpos >= header_height) { add_class_on_scroll() }
+            else { remove_class_on_scroll() }
 
 
-  })
-</script>
-
-<script>
-    var prevScrollpos = window.pageYOffset;
-    window.onscroll = function() {
-        var currentScrollPos = window.pageYOffset;
-        const nav = document.querySelector('#mainNav');
-        if (prevScrollpos > currentScrollPos) {
-            nav.style.top = "0";
-        } else {
-            nav.style.top = "-60px";
+        })
+    </script>
+    <script>
+        const btn = document.querySelector('.nav-tgl');
+        btn.addEventListener('click', evt => {
+            btn.classList.toggle('active');
+        })
+    </script>
+    <script>
+        var prevScrollpos = window.pageYOffset;
+        window.onscroll = function () {
+            var currentScrollPos = window.pageYOffset;
+            const nav = document.querySelector('#mainNav');
+            if (prevScrollpos > currentScrollPos) {
+                nav.style.top = "0";
+            } else {
+                nav.style.top = "-60px";
+            }
+            prevScrollpos = currentScrollPos;
         }
-        prevScrollpos = currentScrollPos;
-    }
-</script>
+    </script>
+    <script>
+
+        // function to set a given theme/color-scheme
+        function setTheme(themeName) {
+            localStorage.setItem('theme', themeName);
+            document.documentElement.className = themeName;
+        }
+        // function to toggle between light and dark theme
+        function toggleTheme() {
+            if (localStorage.getItem('theme') === 'theme-dark') {
+                setTheme('theme-light');
+            } else {
+                setTheme('theme-dark');
+            }
+        }
+        // Immediately invoked function to set the theme on initial load
+        (function () {
+            if (localStorage.getItem('theme') === 'theme-dark') {
+                setTheme('theme-dark');
+                document.getElementById('slider').checked = false;
+            } else {
+                setTheme('theme-light');
+                document.getElementById('slider').checked = true;
+            }
+        })();
+    </script>
+    @*
+    <script src="~/LandingPageTheme/js/mdb.min.js"></script> *@
 </body>
+
 </html>
