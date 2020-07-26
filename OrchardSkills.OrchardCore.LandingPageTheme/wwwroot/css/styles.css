@@ -71,6 +71,12 @@ label,
   background-color: var(--hover-color) !important;
 }
 
+.flex-center {
+  justify-content: center;
+  display: flex;
+  align-items: center;
+}
+
 .dropdown-menu {
   background-color: var(--html-background) !important;
 }
@@ -494,12 +500,7 @@ input:checked + .slider:before {
   padding-top: 3.125rem;
   padding-bottom: 3.125rem;
 }
-.flex-center {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 100%;
-}
+
 .rgba-black-light,
 .rgba-black-light::after {
   background-color: rgba(0, 0, 0, 0.3);

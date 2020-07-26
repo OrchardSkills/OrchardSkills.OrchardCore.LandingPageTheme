@@ -120,6 +120,12 @@ h4 {
 h5 {
   font-size: 1.25rem;
 }
+@media (max-width: 1200px) {
+  .h5,
+  h5 {
+    font-size:calc(1.1rem + 0.2vw);
+  }
+}
 .h6,
 h6 {
   font-size: 1rem;
