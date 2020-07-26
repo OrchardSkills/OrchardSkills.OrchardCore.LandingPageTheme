@@ -24,7 +24,10 @@
 
     <!-- Material Design Theme JavaScript -->
     <script asp-name="LandingPageTheme-js" at="Foot" version="1"></script>
-
+    
+    @* Animation on scroll *@
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     @*
     <script asp-src="~/OrchardCore.Menu/Scripts/activate-links.min.js"
         debug-src="~/OrchardCore.Menu/Scripts/activate-links.js" at="Foot"></script> *@
@@ -83,22 +86,9 @@
             horizontal: false
         });
     </script>
+    
     <script>
-        let scrollpos = window.scrollY
-        const header = document.querySelector("#mainNav")
-        const header_height = header.offsetHeight
-
-        const add_class_on_scroll = () => header.classList.add("navbar-color")
-        const remove_class_on_scroll = () => header.classList.remove("navbar-color")
-
-        window.addEventListener('scroll', function () {
-            scrollpos = window.scrollY;
-
-            if (scrollpos >= header_height) { add_class_on_scroll() }
-            else { remove_class_on_scroll() }
-
-
-        })
+      AOS.init();
     </script>
     <script>
         const btn = document.querySelector('.nav-tgl');
