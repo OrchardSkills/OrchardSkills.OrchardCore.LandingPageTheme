@@ -458,6 +458,14 @@ pre code {
   color: var(--color-secondary);
 }
 
+.form-control {
+  background-color: transparent !important;
+}
+.form-control:focus {
+  background-color: transparent !important;
+}
+
+
 @media (max-width: 1024px) {
 }
 
