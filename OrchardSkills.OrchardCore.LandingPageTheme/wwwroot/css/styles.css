@@ -29,7 +29,9 @@
   --html-background: black;
   --lighter-text-color: #dfdfdf;
 }
-
+body {
+  overflow-x: hidden;
+}
 html,
 body,
 section,
