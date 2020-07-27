@@ -23,7 +23,7 @@
                         <span style="z-index: 9999; position: relative; color: white !important;" class="meta">
                             {% assign format = "MMMM dd, yyyy" | t %}
                             {% assign dateTime = "DateTime" | shape_new: utc: Model.ContentItem.CreatedUtc, format: format | shape_stringify %}
-                            {{ "Posted by" | t }} <a href="#">{{ Model.ContentItem.Owner }}</a>
+                            {{ "Posted by" | t }} <a style="color: white !important" href="#">{{ Model.ContentItem.Owner }}</a>
                             {{ "on {0}" | t: dateTime | raw }}
                         </span>
                     </div>
