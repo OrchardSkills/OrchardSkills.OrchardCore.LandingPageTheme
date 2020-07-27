@@ -15,12 +15,12 @@
     "menuContentItemId": "[js:uuid()]",
     "tagsContentItemId": "[js:uuid()]",
     "tagContentItemId": "[js:uuid()]",
-    "earthTagContentItemId": "[js:uuid()]",
-    "marsTagContentItemId": "[js:uuid()]",
-    "explorationTagContentItemId": "[js:uuid()]",
-    "spaceTagContentItemId": "[js:uuid()]",
+    "visualstudioTagContentItemId": "[js:uuid()]",
+    "vscodeTagContentItemId": "[js:uuid()]",
+    "getstartedTagContentItemId": "[js:uuid()]",
+    "linuxTagContentItemId": "[js:uuid()]",
     "categoriesContentItemId": "[js:uuid()]",
-    "categoryTravelContentItemId": "[js:uuid()]"
+    "categoryCMSContentItemId": "[js:uuid()]"
     // "now": "[js: new Date().toISOString()]"
   },
 
@@ -1093,28 +1093,28 @@
           "TaxonomyPart": {
             "Terms": [
               {
-                "ContentItemId": "[js: variables('earthTagContentItemId')]",
+                "ContentItemId": "[js: variables('visualstudioTagContentItemId')]",
                 "ContentType": "Tag",
-                "DisplayText": "Earth",
+                "DisplayText": "VisualStudio",
                 "TitlePart": {
-                  "Title": "Earth"
+                  "Title": "VisualStudio"
                 },
                 "AutoroutePart": {
-                  "Path": "earth"
+                  "Path": "visualstudio"
                 },
                 "TermPart": {
                   "TaxonomyContentItemId": "[js: variables('tagsContentItemId')]"
                 }
               },
               {
-                "ContentItemId": "[js: variables('marsTagContentItemId')]",
+                "ContentItemId": "[js: variables('vscodeTagContentItemId')]",
                 "ContentType": "Tag",
-                "DisplayText": "Mars",
+                "DisplayText": "VSCode",
                 "TitlePart": {
-                  "Title": "Mars"
+                  "Title": "VSCode"
                 },
                 "AutoroutePart": {
-                  "Path": "mars"
+                  "Path": "vscode"
                 },
                 "TermPart": {
                   "TaxonomyContentItemId": "[js: variables('tagsContentItemId')]"
@@ -1122,28 +1122,28 @@
               },
 
               {
-                "ContentItemId": "[js: variables('explorationTagContentItemId')]",
+                "ContentItemId": "[js: variables('getstartedTagContentItemId')]",
                 "ContentType": "Tag",
-                "DisplayText": "Exploration",
+                "DisplayText": "GetStarted",
                 "TitlePart": {
-                  "Title": "Exploration"
+                  "Title": "GetStarted"
                 },
                 "AutoroutePart": {
-                  "Path": "exploration"
+                  "Path": "getstarted"
                 },
                 "TermPart": {
                   "TaxonomyContentItemId": "[js: variables('tagsContentItemId')]"
                 }
               },
               {
-                "ContentItemId": "[js: variables('spaceTagContentItemId')]",
+                "ContentItemId": "[js: variables('linuxTagContentItemId')]",
                 "ContentType": "Tag",
-                "DisplayText": "Space",
+                "DisplayText": "Linux",
                 "TitlePart": {
-                  "Title": "Space"
+                  "Title": "Linux"
                 },
                 "AutoroutePart": {
-                  "Path": "space"
+                  "Path": "linux"
                 },
                 "TermPart": {
                   "TaxonomyContentItemId": "[js: variables('tagsContentItemId')]"
@@ -1172,19 +1172,19 @@
           "TaxonomyPart": {
             "Terms": [
               {
-                "ContentItemId": "[js: variables('categoryTravelContentItemId')]",
+                "ContentItemId": "[js: variables('categoryCMSContentItemId')]",
                 "ContentType": "Category",
-                "DisplayText": "Travel",
+                "DisplayText": "CMS",
                 "Category": {
                   "Icon": {
                     "Text": "fas fa-globe-americas"
                   }
                 },
                 "TitlePart": {
-                  "Title": "Travel"
+                  "Title": "CMS"
                 },
                 "AutoroutePart": {
-                  "Path": "travel"
+                  "Path": "cms"
                 },
                 "TermPart": {
                   "TaxonomyContentItemId": "[js: variables('categoriesContentItemId')]"
@@ -1256,20 +1256,18 @@
             },
             "Tags": {
               "TermContentItemIds": [
-                "[js: variables('earthTagContentItemId')]",
-                "[js: variables('explorationTagContentItemId')]",
-                "[js: variables('spaceTagContentItemId')]"
+                "[js: variables('visualstudioTagContentItemId')]",
+                "[js: variables('getstartedTagContentItemId')]",
               ],
               "TaxonomyContentItemId": "[js: variables('tagsContentItemId')]",
               "TagNames": [
-                "Earth",
-                "Exploration",
-                "Space"
+                "VisualStudio",
+                "GetStarted",
               ]
             },
             "Category": {
               "TermContentItemIds": [
-                "[js: variables('categoryTravelContentItemId')]"
+                "[js: variables('categoryCMSContentItemId')]"
               ],
               "TaxonomyContentItemId": "[js: variables('categoriesContentItemId')]"
             }
@@ -1304,21 +1302,21 @@
             },
             "Tags": {
               "TagNames": [
-                "Mars",
-                "Exploration",
-                "Space"
+                "VSCode",
+                "GetStarted",
+                "Linux"
               ],
               "TaxonomyContentItemId": "[js: variables('tagsContentItemId')]",
               "TermContentItemIds": [
-                "[js: variables('marsTagContentItemId')]",
-                "[js: variables('explorationTagContentItemId')]",
-                "[js: variables('spaceTagContentItemId')]"
+                "[js: variables('vscodeTagContentItemId')]",
+                "[js: variables('getstartedTagContentItemId')]",
+                "[js: variables('linuxTagContentItemId')]"
               ]
             },
             "Category": {
               "TaxonomyContentItemId": "[js: variables('categoriesContentItemId')]",
               "TermContentItemIds": [
-                "[js: variables('categoryTravelContentItemId')]"
+                "[js: variables('categoryCMSContentItemId')]"
               ]
             }
           },
@@ -1637,10 +1635,6 @@
         {
           "TargetPath": "home-bg.jpg",
           "SourcePath": "../wwwroot/img/home-bg.jpg"
-        },
-        {
-          "TargetPath": "mars-rover.jpg",
-          "SourcePath": "../wwwroot/img/mars-rover.jpg"
         },
         {
           "TargetPath": "linux-vscode.png",
