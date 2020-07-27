@@ -48,6 +48,7 @@ h4,
 h5,
 h6,
 li,
+.subheading,
 a {
   color: var(--font-color) !important;
 }
