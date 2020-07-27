@@ -12,6 +12,7 @@
   --navbar-hover-text-background: #32323b;
   --html-background: white;
   --lighter-text-color: #404750;
+  --markdown-background: #404750;
 }
 
 .theme-dark {
@@ -28,6 +29,7 @@
   --navbar-hover-text-background: #fefefe;
   --html-background: black;
   --lighter-text-color: #dfdfdf;
+  --markdown-background: #dfdfdf;
 }
 body {
   overflow-x: hidden;
@@ -446,6 +448,14 @@ input:checked + .slider:before {
   position: relative;
   z-index: 1;
   color: #fff;
+}
+
+pre {
+  background-color: var(--markdown-background);
+  padding: 10px;
+}
+pre code {
+  color: var(--color-secondary);
 }
 
 @media (max-width: 1024px) {
